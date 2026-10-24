@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Builds a small lab container image ("sentinel-lab-base") from binaries already
+# Builds a small lab container image ("river3-lab-base") from binaries already
 # on this host. Used because public registries are unreachable from the lab.
 # On a normal machine you can replace this with `FROM python:3.12-slim`.
 set -euo pipefail
 
-IMAGE="${1:-sentinel-lab-base:latest}"
+IMAGE="${1:-river3-lab-base:latest}"
 ROOT="$(mktemp -d)"
 trap 'rm -rf "$ROOT"' EXIT
 

@@ -1,0 +1,15 @@
+{
+  "name": "payment-service",
+  "kind": "shared_service",
+  "description": "Conventional service; any intervention needs a verified request session.",
+  "version": 1,
+  "mode": "SHADOW_MODE",
+  "decoys": ["/opt/config/.db_recovery_creds"],
+  "protected_read": ["/root/.aws/**", "/etc/shadow"],
+  "read_allowed": ["/etc/app/**", "/var/lib/payments/**"],
+  "write_allowed": ["/var/lib/payments/**", "/var/log/payments/**"],
+  "exec_allowed_classes": ["OTHER"],
+  "exec_denied_classes": ["PRIVILEGED_TOOL"],
+  "egress_allowed": ["10.20.0.0/16"],
+  "response": {"on_violation": "REVOKE_SESSION", "on_structural_guard": "ALERT"}
+}

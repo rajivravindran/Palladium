@@ -1,0 +1,108 @@
+# River3 pilot stack: PostgreSQL + one-off migration + API (which also serves the console).
+#
+#   cp deploy/.env.example deploy/.env               # fill in secrets (never commit .env)
+#   cp deploy/principals.example.json deploy/principals.json   # then replace every token_sha256
+#   docker compose -f deploy/docker-compose.yml up -d --build
+#
+# The API listens on 127.0.0.1 only; put a TLS reverse proxy (Caddy / nginx) in front of it.
+#
+# Build context is the repository root, not api/: the image builds the console from ui/ in a
+# first stage and copies it next to the API (see api/Dockerfile). api/Dockerfile.dockerignore
+# trims the context.
+#
+# Networking: `internal` is an ordinary bridge network on purpose. Marking it `internal: true`
+# would stop the api container from reaching host.docker.internal (the Ollama / MLX server on the
+# docker host, RIVER3_LLM_BASE_URL) and the containment controller's webhook. The database is
+# still unreachable from outside: it publishes no port and is only on this network. If you run
+# the model somewhere else, you can flip `internal: true` and drop extra_hosts.
+
+x-api-image: &api-image
+  # One image, built once, shared by migrate and api. Tagging it lets `docker compose up api`
+  # find it without rebuilding and keeps the two services on the identical layer set.
+  image: river3-api:local
+  build:
+    context: ..
+    dockerfile: api/Dockerfile
+
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: river3
+      POSTGRES_USER: river3
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in deploy/.env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U river3 -d river3"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+    security_opt: ["no-new-privileges:true"]
+
+  migrate:
+    <<: *api-image
+    command: ["alembic", "upgrade", "head"]
+    env_file: .env
+    environment:
+      RIVER3_DATABASE_URL: postgresql+psycopg://river3:${POSTGRES_PASSWORD}@db:5432/river3
+    depends_on:
+      db: {condition: service_healthy}
+    networks: [internal]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    restart: "no"
+
+  api:
+    <<: *api-image
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # These two override anything in .env: the database lives in this stack, and the
+      # principals file is bind-mounted below.
+      RIVER3_DATABASE_URL: postgresql+psycopg://river3:${POSTGRES_PASSWORD}@db:5432/river3
+      RIVER3_PRINCIPALS_FILE: /run/river3/principals.json
+    volumes:
+      # Who may call the API. deploy/principals.json is git-ignored; start from
+      # deploy/principals.example.json and replace every token_sha256 with the output of
+      #   docker compose -f deploy/docker-compose.yml run --rm api python -m river3_api.cli new-token
+      # Compose creates an empty DIRECTORY at this path if the file is missing, and the API then
+      # fails to start with a JSON error; copy the example first.
+      - ./principals.json:/run/river3/principals.json:ro
+      # Optional: business-specific roles (RIVER3_ROLES_FILE in .env must point at the same path).
+      # - ./roles.json:/run/river3/roles.json:ro
+    # host.docker.internal -> the docker host, on Linux too (Docker Desktop sets it up by itself).
+    # Needed for RIVER3_LLM_BASE_URL=http://host.docker.internal:11434/v1 together with
+    # RIVER3_LLM_ALLOW_PLAIN_HTTP=true in .env; harmless otherwise.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [internal]
+    healthcheck:
+      # Readiness, not just liveness: /api/ready also checks the database is reachable and migrated
+      # to the head this image ships, so a schema drift shows up as "unhealthy" in `docker compose ps`.
+      # python's urllib because the slim image has no curl/wget.
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/ready',timeout=3).status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    pids_limit: 256
+
+volumes:
+  pgdata:
+
+networks:
+  internal:

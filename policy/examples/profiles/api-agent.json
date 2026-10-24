@@ -1,0 +1,42 @@
+{
+  "name": "api-agent",
+  "kind": "ai_worker",
+  "description": "Agent that calls a model API and pulls code from GitHub. Egress is scoped by hostname and port (CONTRACTS section 4): the sensor resolves the names below and fills dest_host on connect events; the engine does no DNS. The two CIDR entries show the port and port-range forms; the bracketed entry is the only way to put a port on an IPv6 range.",
+  "version": 1,
+  "mode": "SHADOW_MODE",
+  "decoys": [
+    "/opt/config/.db_recovery_creds"
+  ],
+  "protected_read": [
+    "/root/.aws/**",
+    "/etc/shadow"
+  ],
+  "read_allowed": [
+    "/workspace/**",
+    "/etc/app/**"
+  ],
+  "write_allowed": [
+    "/workspace/**",
+    "/tmp/agent/**"
+  ],
+  "exec_allowed_classes": [
+    "INTERPRETER",
+    "NET_CLIENT",
+    "DIAGNOSTIC"
+  ],
+  "exec_denied_classes": [
+    "PRIVILEGED_TOOL"
+  ],
+  "egress_allowed": [
+    "api.openai.com:443",
+    "*.github.com:443",
+    "10.0.0.0/8:443",
+    "10.20.0.0/16:8000-8100",
+    "[2001:db8::/32]:443",
+    "192.0.2.53/32"
+  ],
+  "response": {
+    "on_violation": "PAUSE_CONTAINER",
+    "on_structural_guard": "ALERT"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "node": {
+    "tenant_id": "lab",
+    "host_id": "podman-vm"
+  },
+  "sensors": [
+    {
+      "name": "lab-sensor",
+      "token_sha256": "75d445eab57b178ca1e3f0749f889b93e866f55a6766c27759ac50e9a399db18",
+      "resolves_paths": true
+    }
+  ],
+  "workloads": [
+    {
+      "asset_id": "worker-01",
+      "name": "Diagnostic worker 01",
+      "profile": "diagnostic-worker",
+      "kind": "ai_worker",
+      "container_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "generation": "generation-1",
+      "dedicated": true,
+      "active": true,
+      "permitted_actions": [
+        "PAUSE_CONTAINER"
+      ]
+    },
+    {
+      "asset_id": "payments-01",
+      "name": "Payment service 01",
+      "profile": "payment-service",
+      "kind": "shared_service",
+      "container_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "generation": "generation-1",
+      "dedicated": false,
+      "active": true,
+      "permitted_actions": []
+    },
+    {
+      "asset_id": "my-agent-01",
+      "name": "My agent 01",
+      "profile": "my-agent",
+      "kind": "ai_worker",
+      "container_id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "generation": "generation-1",
+      "dedicated": true,
+      "active": true,
+      "permitted_actions": [
+        "PAUSE_CONTAINER"
+      ]
+    }
+  ]
+}

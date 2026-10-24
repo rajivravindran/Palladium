@@ -1,0 +1,11 @@
+{
+  "node": {"tenant_id": "demo", "host_id": "demo-host"},
+  "sensors": [
+    {
+      "name": "ebpf",
+      "token_sha256": "75d445eab57b178ca1e3f0749f889b93e866f55a6766c27759ac50e9a399db18",
+      "resolves_paths": true
+    }
+  ],
+  "workloads": []
+}

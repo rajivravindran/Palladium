@@ -1,0 +1,15 @@
+{
+  "name": "coding-agent",
+  "kind": "ai_worker",
+  "description": "Coding agent in a devcontainer: reads and writes /workspace, runs interpreters and file utilities, talks only to the tool gateway on loopback. Credentials on the box are decoys; opening one freezes the container.",
+  "version": 1,
+  "mode": "ACTIVE_FREEZE_MODE",
+  "decoys": ["/home/agent/.aws/credentials", "/home/agent/.ssh/id_rsa"],
+  "protected_read": ["/etc/shadow", "/root/**"],
+  "read_allowed": ["/workspace/**", "/agents/**", "/usr/**", "/lib/**", "/lib64/**", "/etc/**", "/proc/**", "/dev/**", "/sys/**"],
+  "write_allowed": ["/workspace/**"],
+  "exec_allowed_classes": ["INTERPRETER", "DIAGNOSTIC"],
+  "exec_denied_classes": ["NET_CLIENT", "PRIVILEGED_TOOL"],
+  "egress_allowed": ["127.0.0.1/32"],
+  "response": {"on_violation": "PAUSE_CONTAINER", "on_structural_guard": "ALERT"}
+}

@@ -7,3 +7,15 @@ node_modules/
 ui/dist/
 api/static/
 .DS_Store
+deploy/.env
+deploy/principals.json
+principals.json
+*.pem
+*.key
+*.journal
+containment/build/
+# lab build artefacts and generated fixtures
+demo/river3-notes-test/integration/
+demo/river3-notes-test/*.log
+lab/playground/.shots/
+lab/drift/sessions/

@@ -1,0 +1,34 @@
+{
+  "name": "diagnostic-worker",
+  "kind": "ai_worker",
+  "description": "Read payment logs and settings; no outbound connections. Runs as a Python agent, so INTERPRETER is in scope; network clients and privileged tools are denied (deny wins).",
+  "version": 1,
+  "mode": "ACTIVE_FREEZE_MODE",
+  "decoys": [
+    "/opt/config/.db_recovery_creds"
+  ],
+  "protected_read": [
+    "/root/.aws/**",
+    "/etc/shadow"
+  ],
+  "read_allowed": [
+    "/var/log/app/**",
+    "/etc/app/**"
+  ],
+  "write_allowed": [
+    "/tmp/diagnostic-output/**"
+  ],
+  "exec_allowed_classes": [
+    "DIAGNOSTIC",
+    "INTERPRETER"
+  ],
+  "exec_denied_classes": [
+    "NET_CLIENT",
+    "PRIVILEGED_TOOL"
+  ],
+  "egress_allowed": [],
+  "response": {
+    "on_violation": "PAUSE_CONTAINER",
+    "on_structural_guard": "ALERT"
+  }
+}

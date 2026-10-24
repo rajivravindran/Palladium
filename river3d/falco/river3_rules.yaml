@@ -1,0 +1,60 @@
+# River3 Falco rules — the Mac sensor path.
+#
+# Falco runs inside the podman machine VM and emits one JSON alert per syscall exit
+# for containers only. `river3d -source falco` maps these onto the same Event shape
+# the eBPF sensor produces. Enrollment (which containers matter) is river3d's job,
+# not Falco's: these rules fire for every container and river3d drops the rest.
+#
+# Run Falco with:
+#   falco -r river3_rules.yaml -o json_output=true -o json_include_output_property=false \
+#         -o json_include_tags_property=false -o priority=debug \
+#         -o http_output.enabled=true -o http_output.url=http://127.0.0.1:8788/falco
+# or pipe stdout:  falco ... | river3d -source falco -falco-input -
+#
+# Only the fields named below are read; everything else in the alert is ignored.
+
+- required_engine_version: 0.26.0
+
+- macro: river3_in_container
+  condition: (container.id != host)
+
+# openat / openat2 / open, on exit, success or failure. fd.name is the path libsinsp
+# resolved against the process cwd; evt.arg.flags carries the open mode.
+- rule: river3_open
+  desc: file open inside a container (River3 Channel A)
+  condition: >
+    evt.dir = < and evt.type in (open, openat, openat2) and river3_in_container
+  output: >
+    river3 open container.id=%container.id container.full_id=%container.full_id
+    proc.pid=%proc.pid proc.ppid=%proc.ppid proc.name=%proc.name user.uid=%user.uid
+    fd.name=%fd.name evt.arg.name=%evt.arg.name evt.arg.flags=%evt.arg.flags
+    evt.rawres=%evt.rawres evt.res=%evt.res evt.rawtime=%evt.rawtime evt.type=%evt.type
+  priority: DEBUG
+  tags: [river3]
+
+# execve / execveat on exit. proc.exepath is the resolved executable; proc.cmdline is
+# Channel B only and never reaches the policy engine.
+- rule: river3_exec
+  desc: process execution inside a container (River3 Channel A + B)
+  condition: >
+    evt.dir = < and evt.type in (execve, execveat) and river3_in_container
+  output: >
+    river3 exec container.id=%container.id container.full_id=%container.full_id
+    proc.pid=%proc.pid proc.ppid=%proc.ppid proc.name=%proc.name user.uid=%user.uid
+    proc.exepath=%proc.exepath evt.arg.filename=%evt.arg.filename proc.cmdline=%proc.cmdline
+    evt.rawres=%evt.rawres evt.res=%evt.res evt.rawtime=%evt.rawtime evt.type=%evt.type
+  priority: DEBUG
+  tags: [river3]
+
+# connect on exit, IPv4/IPv6 only. EINPROGRESS (non-blocking) becomes outcome=pending.
+- rule: river3_connect
+  desc: outbound connection attempt inside a container (River3 Channel A)
+  condition: >
+    evt.dir = < and evt.type = connect and (fd.type = ipv4 or fd.type = ipv6) and river3_in_container
+  output: >
+    river3 connect container.id=%container.id container.full_id=%container.full_id
+    proc.pid=%proc.pid proc.ppid=%proc.ppid proc.name=%proc.name user.uid=%user.uid
+    fd.rip=%fd.rip fd.rport=%fd.rport fd.sip=%fd.sip fd.l4proto=%fd.l4proto
+    evt.rawres=%evt.rawres evt.res=%evt.res evt.rawtime=%evt.rawtime evt.type=%evt.type
+  priority: DEBUG
+  tags: [river3]

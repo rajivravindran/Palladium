@@ -1,0 +1,37 @@
+# Ignore file for api/Dockerfile (BuildKit reads <Dockerfile>.dockerignore next to the Dockerfile
+# and uses it instead of a root .dockerignore). Paths are relative to the build context, which
+# is the repository root. Everything not needed by the two stages stays out of the context:
+# smaller uploads, no secrets or local databases in layers, no stale local console build.
+
+# other components (built separately)
+containment
+policy
+river3d
+lab
+docs
+*.md
+
+# api: local env, tests, caches, local sqlite databases, local console build
+api/.venv
+api/tests
+api/.pytest_cache
+api/static
+**/__pycache__
+**/*.pyc
+**/*.db
+**/*.db-journal
+
+# ui: installed locally for `npm run dev`; the image runs its own npm ci
+ui/node_modules
+ui/dist
+
+# never in an image
+deploy/.env
+deploy/principals.json
+deploy/roles.json
+**/*.pem
+**/*.key
+**/*.journal
+.git
+.gitignore
+.DS_Store

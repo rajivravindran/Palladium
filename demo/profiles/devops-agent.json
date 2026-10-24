@@ -1,0 +1,15 @@
+{
+  "name": "devops-agent",
+  "kind": "ai_worker",
+  "description": "DevOps agent: reads app config under /etc/app, writes its own notes under /workspace, reaches the internal 10/8 range and the tool gateway on loopback. Shared /tmp and the public internet are out of scope; credentials on the box are decoys.",
+  "version": 1,
+  "mode": "ACTIVE_FREEZE_MODE",
+  "decoys": ["/home/agent/.aws/credentials", "/home/agent/.ssh/id_rsa"],
+  "protected_read": ["/etc/shadow", "/root/**"],
+  "read_allowed": ["/workspace/**", "/agents/**", "/usr/**", "/lib/**", "/lib64/**", "/etc/**", "/proc/**", "/dev/**", "/sys/**"],
+  "write_allowed": ["/workspace/**"],
+  "exec_allowed_classes": ["INTERPRETER", "DIAGNOSTIC"],
+  "exec_denied_classes": ["NET_CLIENT", "PRIVILEGED_TOOL"],
+  "egress_allowed": ["10.0.0.0/8", "127.0.0.1/32"],
+  "response": {"on_violation": "PAUSE_CONTAINER", "on_structural_guard": "ALERT"}
+}

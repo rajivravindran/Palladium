@@ -1,0 +1,456 @@
+{
+  "started_at": "20261024T112852Z",
+  "type": "operator containment test, not an LLM injection result",
+  "probe": "wget --version (no remote download)",
+  "passed": true,
+  "shadow_command": {
+    "command": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "agent",
+      "wget",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "GNU Wget 1.25.0 built on linux-gnu.\n\n-cares +digest -gpgme +https +ipv6 +iri +large-file -metalink +nls \n+ntlm +opie +psl +ssl/gnutls \n\nWgetrc: \n    /etc/wgetrc (system)\nLocale: \n    /usr/share/locale \nCompile: \n    gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" \n    -DLOCALEDIR=\"/usr/share/locale\" -I. -I../../src -I../lib \n    -I../../lib -Wdate-time -D_FORTIFY_SOURCE=2 \n    -I/usr/include/p11-kit-1 -DHAVE_LIBGNUTLS -DNDEBUG -g -O2 \n    -Werror=implicit-function-declaration \n    -ffile-prefix-map=/build/reproducible-path/wget-1.25.0=. \n    -fstack-protector-strong -fstack-clash-protection -Wformat \n    -Werror=format-security -fcf-protection -DNO_SSLv2 \nLink: \n    gcc -I/usr/include/p11-kit-1 -DHAVE_LIBGNUTLS -DNDEBUG -g -O2 \n    -Werror=implicit-function-declaration \n    -ffile-prefix-map=/build/reproducible-path/wget-1.25.0=. \n    -fstack-protector-strong -fstack-clash-protection -Wformat \n    -Werror=format-security -fcf-protection -DNO_SSLv2 -Wl,-z,relro \n    -Wl,-z,now -lpcre2-8 -luuid -lidn2 -lnettle -lgnutls -lz -lpsl \n    ../lib/libgnu.a \n\nCopyright (C) 2015 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later\n<http://www.gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nOriginally written by Hrvoje Niksic <hniksic@xemacs.org>.\nPlease send bug reports and questions to <bug-wget@gnu.org>.\n",
+    "stderr": ""
+  },
+  "shadow_incident": {
+    "id": "inc_775e7fac2e02",
+    "workload": {
+      "id": "coding-notes-agent-01",
+      "name": "coding-notes-agent-01",
+      "profile": "coding-notes-agent",
+      "kind": "ai_worker",
+      "sensor": "ebpf",
+      "state": "running",
+      "labels": {
+        "discovered": "docker"
+      },
+      "team": "platform",
+      "demo": false,
+      "enrolled_at": "2026-10-24T10:40:21.546425",
+      "updated_at": "2026-10-24T10:44:49.941547"
+    },
+    "title": "Denied type of program started",
+    "threat": "agent_drift",
+    "severity": "high",
+    "verdict": "prohibited",
+    "rule": "EXEC_CLASS_DENIED",
+    "reason": "Findings: EXEC_CLASS_DENIED. Recommended PAUSE_CONTAINER, held at ALERT by: SHADOW_MODE.",
+    "mode": "shadow",
+    "status": "open",
+    "response": {},
+    "policy": {
+      "profile_name": "coding-notes-agent",
+      "profile_version": 2,
+      "status": "VIOLATION",
+      "findings": [
+        {
+          "code": "EXEC_CLASS_DENIED",
+          "rule": "NET_CLIENT"
+        }
+      ],
+      "recommended_action": "PAUSE_CONTAINER",
+      "action": "ALERT",
+      "blockers": [
+        "SHADOW_MODE"
+      ],
+      "candidate": null
+    },
+    "demo": false,
+    "session_id": null,
+    "session": null,
+    "created_at": "2026-10-24T11:28:53.984788",
+    "updated_at": "2026-10-24T11:28:53.999319",
+    "event_count": 1,
+    "events": [
+      {
+        "id": "ev-9ecea094de2b9fe7c18d4901",
+        "workload_id": "coding-notes-agent-01",
+        "session_id": null,
+        "kind": "process_exec",
+        "outcome": "success",
+        "ts": "2026-10-24T11:28:53.253971",
+        "facts": {
+          "id": "ev-9ecea094de2b9fe7c18d4901",
+          "kind": "process_exec",
+          "outcome": "success",
+          "process": {
+            "comm": "wget",
+            "pid": 13298,
+            "ppid": 3644,
+            "tgid": 13298,
+            "uid": 1000
+          },
+          "sensor": "ebpf",
+          "t_kernel_enter_ns": 4950202139607,
+          "t_kernel_exit_ns": 4950205203553,
+          "t_received_ns": 1792841333253971700,
+          "target": {
+            "binary_class": "NET_CLIENT",
+            "binary_detail": "NET_CLIENT",
+            "exe": "/usr/bin/wget",
+            "exe_dev": 65,
+            "exe_ino": 1067377,
+            "exe_sha256": "1682f2afcb3092f841c087e28f9fa29b721ad14a661f21bcf2dca28f05f42ce7",
+            "exe_size": 482672,
+            "path_resolved": true
+          },
+          "workload": {
+            "container_id": "2ead5a582e677d62cb55d5635c818b4acd161bb6960def2ad6afdb93bf3879d5",
+            "enrolled": true,
+            "id": "coding-notes-agent-01",
+            "kind": "ai_worker",
+            "name": "coding-notes-agent-01",
+            "profile": "coding-notes-agent",
+            "team": "platform"
+          }
+        },
+        "payload": {
+          "argv": [
+            "wget",
+            "--version"
+          ]
+        }
+      }
+    ],
+    "actions": [],
+    "summaries": []
+  },
+  "shadow_state": {
+    "Status": "running",
+    "Running": true,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 3664,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-24T10:44:48.854972638Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "active_command": {
+    "command": [
+      "docker",
+      "compose",
+      "exec",
+      "-T",
+      "agent",
+      "wget",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "GNU Wget 1.25.0 built on linux-gnu.\n\n-cares +digest -gpgme +https +ipv6 +iri +large-file -metalink +nls \n+ntlm +opie +psl +ssl/gnutls \n\nWgetrc: \n    /etc/wgetrc (system)\nLocale: \n    /usr/share/locale \nCompile: \n    gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" \n    -DLOCALEDIR=\"/usr/share/locale\" -I. -I../../src -I../lib \n    -I../../lib -Wdate-time -D_FORTIFY_SOURCE=2 \n    -I/usr/include/p11-kit-1 -DHAVE_LIBGNUTLS -DNDEBUG -g -O2 \n    -Werror=implicit-function-declaration \n    -ffile-prefix-map=/build/reproducible-path/wget-1.25.0=. \n    -fstack-protector-strong -fstack-clash-protection -Wformat \n    -Werror=format-security -fcf-protection -DNO_SSLv2 \nLink: \n    gcc -I/usr/include/p11-kit-1 -DHAVE_LIBGNUTLS -DNDEBUG -g -O2 \n    -Werror=implicit-function-declaration \n    -ffile-prefix-map=/build/reproducible-path/wget-1.25.0=. \n    -fstack-protector-strong -fstack-clash-protection -Wformat \n    -Werror=format-security -fcf-protection -DNO_SSLv2 -Wl,-z,relro \n    -Wl,-z,now -lpcre2-8 -luuid -lidn2 -lnettle -lgnutls -lz -lpsl \n    ../lib/libgnu.a \n\nCopyright (C) 2015 Free Software Foundation, Inc.\nLicense GPLv3+: GNU GPL version 3 or later\n<http://www.gnu.org/licenses/gpl.html>.\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nOriginally written by Hrvoje Niksic <hniksic@xemacs.org>.\nPlease send bug reports and questions to <bug-wget@gnu.org>.\n",
+    "stderr": ""
+  },
+  "active_incident": {
+    "id": "inc_3d997feeb8f2",
+    "workload": {
+      "id": "coding-notes-agent-01",
+      "name": "coding-notes-agent-01",
+      "profile": "coding-notes-agent",
+      "kind": "ai_worker",
+      "sensor": "ebpf",
+      "state": "frozen",
+      "labels": {
+        "discovered": "docker"
+      },
+      "team": "platform",
+      "demo": false,
+      "enrolled_at": "2026-10-24T10:40:21.546425",
+      "updated_at": "2026-10-24T11:28:58.723914"
+    },
+    "title": "Denied type of program started",
+    "threat": "agent_drift",
+    "severity": "high",
+    "verdict": "prohibited",
+    "rule": "EXEC_CLASS_DENIED",
+    "reason": "Findings: EXEC_CLASS_DENIED.",
+    "mode": "active",
+    "status": "contained",
+    "response": {
+      "action": "PAUSE_CONTAINER",
+      "adapter": "docker",
+      "idempotency_key": "policy_3ac8edb59258ed142afed5c6c7ff79f184be2c3c91b4a2fbb31d80a30071f489",
+      "latency_ms": 57.621,
+      "observed": {
+        "container_id": "2ead5a582e67",
+        "generation": "2026-10-24T10:44:48.854972638Z",
+        "status": "paused"
+      },
+      "state": "verified"
+    },
+    "policy": {
+      "profile_name": "coding-notes-agent",
+      "profile_version": 3,
+      "status": "VIOLATION",
+      "findings": [
+        {
+          "code": "EXEC_CLASS_DENIED",
+          "rule": "NET_CLIENT"
+        }
+      ],
+      "recommended_action": "PAUSE_CONTAINER",
+      "action": "PAUSE_CONTAINER",
+      "blockers": [],
+      "candidate": {
+        "action": "PAUSE_CONTAINER",
+        "evidence_id": "ev-46054534815b52c9df06bdfa",
+        "expires_at": "2026-10-24T11:29:02.582581112Z",
+        "idempotency_key": "policy_3ac8edb59258ed142afed5c6c7ff79f184be2c3c91b4a2fbb31d80a30071f489",
+        "issued_at": "2026-10-24T11:28:57.582581112Z",
+        "policy_name": "coding-notes-agent",
+        "policy_version": 3,
+        "target": {
+          "asset_id": "coding-notes-agent-01",
+          "container_id": "2ead5a582e677d62cb55d5635c818b4acd161bb6960def2ad6afdb93bf3879d5",
+          "generation": "2026-10-24T10:44:48.854972638Z",
+          "host_id": "demo-host",
+          "tenant_id": "demo"
+        }
+      }
+    },
+    "demo": false,
+    "session_id": null,
+    "session": null,
+    "created_at": "2026-10-24T11:28:58.083049",
+    "updated_at": "2026-10-24T11:28:58.710389",
+    "event_count": 1,
+    "events": [
+      {
+        "id": "ev-46054534815b52c9df06bdfa",
+        "workload_id": "coding-notes-agent-01",
+        "session_id": null,
+        "kind": "process_exec",
+        "outcome": "success",
+        "ts": "2026-10-24T11:28:57.308133",
+        "facts": {
+          "id": "ev-46054534815b52c9df06bdfa",
+          "kind": "process_exec",
+          "outcome": "success",
+          "process": {
+            "comm": "wget",
+            "pid": 13340,
+            "ppid": 13331,
+            "tgid": 13340,
+            "uid": 1000
+          },
+          "sensor": "ebpf",
+          "t_kernel_enter_ns": 4954247416293,
+          "t_kernel_exit_ns": 4954259364988,
+          "t_received_ns": 1792841337308133400,
+          "target": {
+            "binary_class": "NET_CLIENT",
+            "binary_detail": "NET_CLIENT",
+            "exe": "/usr/bin/wget",
+            "exe_dev": 65,
+            "exe_ino": 1067377,
+            "exe_sha256": "1682f2afcb3092f841c087e28f9fa29b721ad14a661f21bcf2dca28f05f42ce7",
+            "exe_size": 482672,
+            "path_resolved": true
+          },
+          "workload": {
+            "container_id": "2ead5a582e677d62cb55d5635c818b4acd161bb6960def2ad6afdb93bf3879d5",
+            "enrolled": true,
+            "id": "coding-notes-agent-01",
+            "kind": "ai_worker",
+            "name": "coding-notes-agent-01",
+            "profile": "coding-notes-agent",
+            "team": "platform"
+          }
+        },
+        "payload": {
+          "argv": [
+            "wget",
+            "--version"
+          ]
+        }
+      }
+    ],
+    "actions": [],
+    "summaries": []
+  },
+  "paused_state": {
+    "Status": "paused",
+    "Running": true,
+    "Paused": true,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 3664,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-24T10:44:48.854972638Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "final_state": {
+    "Status": "running",
+    "Running": true,
+    "Paused": false,
+    "Restarting": false,
+    "OOMKilled": false,
+    "Dead": false,
+    "Pid": 3664,
+    "ExitCode": 0,
+    "Error": "",
+    "StartedAt": "2026-10-24T10:44:48.854972638Z",
+    "FinishedAt": "0001-01-01T00:00:00Z"
+  },
+  "restored_to_shadow": true,
+  "active_incident_after_resume": {
+    "id": "inc_3d997feeb8f2",
+    "workload": {
+      "id": "coding-notes-agent-01",
+      "name": "coding-notes-agent-01",
+      "profile": "coding-notes-agent",
+      "kind": "ai_worker",
+      "sensor": "ebpf",
+      "state": "running",
+      "labels": {
+        "discovered": "docker"
+      },
+      "team": "platform",
+      "demo": false,
+      "enrolled_at": "2026-10-24T10:40:21.546425",
+      "updated_at": "2026-10-24T11:29:03.962246"
+    },
+    "title": "Denied type of program started",
+    "threat": "agent_drift",
+    "severity": "high",
+    "verdict": "prohibited",
+    "rule": "EXEC_CLASS_DENIED",
+    "reason": "Findings: EXEC_CLASS_DENIED.",
+    "mode": "active",
+    "status": "contained",
+    "response": {
+      "action": "PAUSE_CONTAINER",
+      "adapter": "docker",
+      "idempotency_key": "policy_3ac8edb59258ed142afed5c6c7ff79f184be2c3c91b4a2fbb31d80a30071f489",
+      "latency_ms": 57.621,
+      "observed": {
+        "container_id": "2ead5a582e67",
+        "generation": "2026-10-24T10:44:48.854972638Z",
+        "status": "paused"
+      },
+      "state": "verified"
+    },
+    "policy": {
+      "profile_name": "coding-notes-agent",
+      "profile_version": 3,
+      "status": "VIOLATION",
+      "findings": [
+        {
+          "code": "EXEC_CLASS_DENIED",
+          "rule": "NET_CLIENT"
+        }
+      ],
+      "recommended_action": "PAUSE_CONTAINER",
+      "action": "PAUSE_CONTAINER",
+      "blockers": [],
+      "candidate": {
+        "action": "PAUSE_CONTAINER",
+        "evidence_id": "ev-46054534815b52c9df06bdfa",
+        "expires_at": "2026-10-24T11:29:02.582581112Z",
+        "idempotency_key": "policy_3ac8edb59258ed142afed5c6c7ff79f184be2c3c91b4a2fbb31d80a30071f489",
+        "issued_at": "2026-10-24T11:28:57.582581112Z",
+        "policy_name": "coding-notes-agent",
+        "policy_version": 3,
+        "target": {
+          "asset_id": "coding-notes-agent-01",
+          "container_id": "2ead5a582e677d62cb55d5635c818b4acd161bb6960def2ad6afdb93bf3879d5",
+          "generation": "2026-10-24T10:44:48.854972638Z",
+          "host_id": "demo-host",
+          "tenant_id": "demo"
+        }
+      }
+    },
+    "demo": false,
+    "session_id": null,
+    "session": null,
+    "created_at": "2026-10-24T11:28:58.083049",
+    "updated_at": "2026-10-24T11:28:58.710389",
+    "event_count": 1,
+    "events": [
+      {
+        "id": "ev-46054534815b52c9df06bdfa",
+        "workload_id": "coding-notes-agent-01",
+        "session_id": null,
+        "kind": "process_exec",
+        "outcome": "success",
+        "ts": "2026-10-24T11:28:57.308133",
+        "facts": {
+          "id": "ev-46054534815b52c9df06bdfa",
+          "kind": "process_exec",
+          "outcome": "success",
+          "process": {
+            "comm": "wget",
+            "pid": 13340,
+            "ppid": 13331,
+            "tgid": 13340,
+            "uid": 1000
+          },
+          "sensor": "ebpf",
+          "t_kernel_enter_ns": 4954247416293,
+          "t_kernel_exit_ns": 4954259364988,
+          "t_received_ns": 1792841337308133400,
+          "target": {
+            "binary_class": "NET_CLIENT",
+            "binary_detail": "NET_CLIENT",
+            "exe": "/usr/bin/wget",
+            "exe_dev": 65,
+            "exe_ino": 1067377,
+            "exe_sha256": "1682f2afcb3092f841c087e28f9fa29b721ad14a661f21bcf2dca28f05f42ce7",
+            "exe_size": 482672,
+            "path_resolved": true
+          },
+          "workload": {
+            "container_id": "2ead5a582e677d62cb55d5635c818b4acd161bb6960def2ad6afdb93bf3879d5",
+            "enrolled": true,
+            "id": "coding-notes-agent-01",
+            "kind": "ai_worker",
+            "name": "coding-notes-agent-01",
+            "profile": "coding-notes-agent",
+            "team": "platform"
+          }
+        },
+        "payload": {
+          "argv": [
+            "wget",
+            "--version"
+          ]
+        }
+      }
+    ],
+    "actions": [
+      {
+        "id": "act_cbb8182437c4",
+        "incident_id": "inc_3d997feeb8f2",
+        "workload_id": "coding-notes-agent-01",
+        "action": "resume",
+        "session_id": null,
+        "operator": "rajiv",
+        "reason": "Resume local coding-agent experiment after reviewing containment evidence",
+        "status": "completed",
+        "result": {
+          "adapter": "docker",
+          "before": "paused",
+          "latency_ms": 64.412,
+          "observed": {
+            "container_id": "2ead5a582e67",
+            "generation": "2026-10-24T10:44:48.854972638Z",
+            "status": "running"
+          },
+          "operator": "rajiv",
+          "workload_state": "running"
+        },
+        "requested_at": "2026-10-24T11:29:02.717708",
+        "completed_at": "2026-10-24T11:29:03.943084"
+      }
+    ],
+    "summaries": []
+  }
+}

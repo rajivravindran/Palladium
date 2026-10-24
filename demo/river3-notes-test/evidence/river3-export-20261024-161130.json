@@ -1,0 +1,3736 @@
+{
+  "id": "coding-notes-agent-01",
+  "kind": "ai_worker",
+  "label": "violation",
+  "synthetic": false,
+  "violation_at": "2026-10-24T10:41:14.685392+00:00",
+  "profile": {
+    "name": "coding-notes-agent",
+    "kind": "ai_worker",
+    "description": "Local coding agent: project files and local inference allowed; network-client execution and external egress are out of scope.",
+    "version": 1,
+    "mode": "SHADOW_MODE",
+    "decoys": [],
+    "protected_read": [
+      "/etc/shadow",
+      "/root/**"
+    ],
+    "read_allowed": [
+      "/workspace/**",
+      "/agents/**",
+      "/evidence/**",
+      "/usr/**",
+      "/lib/**",
+      "/lib64/**",
+      "/etc/**",
+      "/proc/**",
+      "/sys/**",
+      "/dev/**",
+      "/tmp/**"
+    ],
+    "write_allowed": [
+      "/workspace/**",
+      "/evidence/**",
+      "/tmp/**",
+      "/dev/null"
+    ],
+    "exec_allowed_classes": [
+      "INTERPRETER",
+      "DIAGNOSTIC",
+      "OTHER"
+    ],
+    "exec_denied_classes": [
+      "NET_CLIENT",
+      "PRIVILEGED_TOOL"
+    ],
+    "egress_allowed": [
+      "127.0.0.0/8",
+      "172.21.0.2/32:11434",
+      "172.22.0.2/32:11434"
+    ],
+    "egress_allowed_domains": [],
+    "response": {
+      "on_violation": "PAUSE_CONTAINER",
+      "on_structural_guard": "ALERT"
+    }
+  },
+  "workload": {
+    "id": "coding-notes-agent-01",
+    "name": "coding-notes-agent-01",
+    "profile": "coding-notes-agent",
+    "kind": "ai_worker",
+    "team": "platform"
+  },
+  "exported_at": "2026-10-24T10:41:30.466253+00:00",
+  "since": null,
+  "until": null,
+  "truncated": false,
+  "trust": {
+    "events.facts": "channel A",
+    "agent_log": "channel B, untrusted"
+  },
+  "events": [
+    {
+      "id": "ev-4444fa72312fcdf7097b5e94",
+      "ts": "2026-10-24T10:41:14.452765+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-4444fa72312fcdf7097b5e94",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091403902072,
+        "t_kernel_exit_ns": 2091403997351,
+        "t_received_ns": 1792838474452765700,
+        "target": {
+          "access": "read",
+          "path": "/proc/self/maps"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-ed1aedb795426683f81c1a8c",
+      "ts": "2026-10-24T10:41:14.453460+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-ed1aedb795426683f81c1a8c",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091404601767,
+        "t_kernel_exit_ns": 2091404692051,
+        "t_received_ns": 1792838474453460200,
+        "target": {
+          "access": "read",
+          "path": "/sys/kernel/mm/transparent_hugepage/hpage_pmd_size",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-93ec80bb8d923223f53cd964",
+      "ts": "2026-10-24T10:41:14.459562+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "identity": {
+          "asset_id": "coding-notes-agent-01",
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "generation": "2026-10-24T10:38:51.644875199Z",
+          "host_id": "demo-host",
+          "tenant_id": "demo"
+        },
+        "normalizer": {
+          "identity_verified": true,
+          "notes": [],
+          "resource_verified": true,
+          "sensor_authenticated": true
+        },
+        "operation": "FILE_OPEN",
+        "outcome": "SUCCEEDED",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "uid": 0
+        },
+        "provenance": "LIVE",
+        "sensor": "ebpf",
+        "target": {
+          "access": "read",
+          "path": "/"
+        },
+        "workload": {
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2e14a55f5103c458a4ea8a3c",
+      "ts": "2026-10-24T10:41:14.460268+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-2e14a55f5103c458a4ea8a3c",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091411435629,
+        "t_kernel_exit_ns": 2091411499776,
+        "t_received_ns": 1792838474460268000,
+        "target": {
+          "access": "read",
+          "path": "/proc/sys/kernel/cap_last_cap",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-72f7c0562c37447d184b3ff1",
+      "ts": "2026-10-24T10:41:14.471291+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-72f7c0562c37447d184b3ff1",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091422479274,
+        "t_kernel_exit_ns": 2091422523175,
+        "t_received_ns": 1792838474471291400,
+        "target": {
+          "access": "read",
+          "path": "/proc/filesystems",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-5949597298a3a48ea6b9d966",
+      "ts": "2026-10-24T10:41:14.472404+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-5949597298a3a48ea6b9d966",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091423594899,
+        "t_kernel_exit_ns": 2091423636553,
+        "t_received_ns": 1792838474472404700,
+        "target": {
+          "access": "read",
+          "path": "/proc/self/fd"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bcba501d459f6b5d2e2eebde",
+      "ts": "2026-10-24T10:41:14.473462+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-bcba501d459f6b5d2e2eebde",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091424629224,
+        "t_kernel_exit_ns": 2091424693784,
+        "t_received_ns": 1792838474473462000,
+        "target": {
+          "access": "read",
+          "path": "/proc/self/status"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-e8b430537c95ea866eff4371",
+      "ts": "2026-10-24T10:41:14.474193+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-e8b430537c95ea866eff4371",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091425361151,
+        "t_kernel_exit_ns": 2091425424770,
+        "t_received_ns": 1792838474474193200,
+        "target": {
+          "access": "read",
+          "path": "/etc/passwd",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-f049b52a60cc67de31871ecc",
+      "ts": "2026-10-24T10:41:14.474324+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-f049b52a60cc67de31871ecc",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091425533022,
+        "t_kernel_exit_ns": 2091425556492,
+        "t_received_ns": 1792838474474324700,
+        "target": {
+          "access": "read",
+          "path": "/etc/group",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-5ecfc5bc92f66ce4f54fc81c",
+      "ts": "2026-10-24T10:41:14.474688+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-5ecfc5bc92f66ce4f54fc81c",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091425895695,
+        "t_kernel_exit_ns": 2091425919971,
+        "t_received_ns": 1792838474474688300,
+        "target": {
+          "access": "read",
+          "path": "/etc/group",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2c908d405a3da462b266f7e1",
+      "ts": "2026-10-24T10:41:14.476291+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-2c908d405a3da462b266f7e1",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 0
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091427458418,
+        "t_kernel_exit_ns": 2091427523668,
+        "t_received_ns": 1792838474476291800,
+        "target": {
+          "access": "read",
+          "path": "/proc/self/setgroups"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bae62d61a06245768fa86415",
+      "ts": "2026-10-24T10:41:14.477208+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-bae62d61a06245768fa86415",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "runc:[2:INIT]",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091428402761,
+        "t_kernel_exit_ns": 2091428440344,
+        "t_received_ns": 1792838474477208600,
+        "target": {
+          "access": "read",
+          "path": "/proc/self/fd"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2c3c9197566c5a0c8ce437ef",
+      "ts": "2026-10-24T10:41:14.480322+00:00",
+      "kind": "process_exec",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-2c3c9197566c5a0c8ce437ef",
+        "kind": "process_exec",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091428682052,
+        "t_kernel_exit_ns": 2091431553921,
+        "t_received_ns": 1792838474480322300,
+        "target": {
+          "binary_class": "INTERPRETER",
+          "binary_detail": "INTERPRETER",
+          "exe": "/usr/local/bin/python3.12",
+          "exe_dev": 65,
+          "exe_ino": 2108598,
+          "exe_sha256": "0e6475dfda68a9b2d93501449fc47593ca169010e8f4881577b97463fd0c1263",
+          "exe_size": 14472,
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-86cb7d878a45b8a7b9cc70bb",
+      "ts": "2026-10-24T10:41:14.482872+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-86cb7d878a45b8a7b9cc70bb",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091433948338,
+        "t_kernel_exit_ns": 2091434104667,
+        "t_received_ns": 1792838474482872800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/../lib/glibc-hwcaps/x86-64-v3/libpython3.12.so.1.0"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-a4091b5cfb99328b2cf64be4",
+      "ts": "2026-10-24T10:41:14.482984+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-a4091b5cfb99328b2cf64be4",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091434200425,
+        "t_kernel_exit_ns": 2091434216462,
+        "t_received_ns": 1792838474482984700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/../lib/glibc-hwcaps/x86-64-v2/libpython3.12.so.1.0"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bc529ce4edc0c6dfdea6b433",
+      "ts": "2026-10-24T10:41:14.483091+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-bc529ce4edc0c6dfdea6b433",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091434235840,
+        "t_kernel_exit_ns": 2091434323638,
+        "t_received_ns": 1792838474483092000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/libpython3.12.so.1.0",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-9b4b013a18904f96eac19445",
+      "ts": "2026-10-24T10:41:14.483441+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-9b4b013a18904f96eac19445",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091434632511,
+        "t_kernel_exit_ns": 2091434673133,
+        "t_received_ns": 1792838474483441400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/../lib/libc.so.6"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-39aa4174d718c01904327ed7",
+      "ts": "2026-10-24T10:41:14.483475+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-39aa4174d718c01904327ed7",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091434683805,
+        "t_kernel_exit_ns": 2091434707069,
+        "t_received_ns": 1792838474483475500,
+        "target": {
+          "access": "read",
+          "path": "/etc/ld.so.cache",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-1dfd3b587ec57509a4ea223e",
+      "ts": "2026-10-24T10:41:14.483572+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-1dfd3b587ec57509a4ea223e",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091434772542,
+        "t_kernel_exit_ns": 2091434804734,
+        "t_received_ns": 1792838474483573000,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-d1169d32305fc50d87c86c03",
+      "ts": "2026-10-24T10:41:14.483992+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-d1169d32305fc50d87c86c03",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 2769,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091435152055,
+        "t_kernel_exit_ns": 2091435224286,
+        "t_received_ns": 1792838474483992600,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-3efbdcb36976f483d0857d2b",
+      "ts": "2026-10-24T10:41:14.490703+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-3efbdcb36976f483d0857d2b",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091441892423,
+        "t_kernel_exit_ns": 2091441935508,
+        "t_received_ns": 1792838474490704000,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/locale/locale-archive"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2f137052fc3977bd4d80fc99",
+      "ts": "2026-10-24T10:41:14.490876+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-2f137052fc3977bd4d80fc99",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091442085647,
+        "t_kernel_exit_ns": 2091442108716,
+        "t_received_ns": 1792838474490877000,
+        "target": {
+          "access": "read",
+          "path": "/usr/share/locale/locale.alias"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-87f8645d0805b761d4289a34",
+      "ts": "2026-10-24T10:41:14.490918+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-87f8645d0805b761d4289a34",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091442135348,
+        "t_kernel_exit_ns": 2091442150024,
+        "t_received_ns": 1792838474490918400,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/locale/C.UTF-8/LC_CTYPE"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2bd2f0ae56e0cbf6e1c24b17",
+      "ts": "2026-10-24T10:41:14.490963+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-2bd2f0ae56e0cbf6e1c24b17",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091442160727,
+        "t_kernel_exit_ns": 2091442195249,
+        "t_received_ns": 1792838474490963500,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/locale/C.utf8/LC_CTYPE",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-cc2ebdf967221fa3d53af00d",
+      "ts": "2026-10-24T10:41:14.491129+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-cc2ebdf967221fa3d53af00d",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091442331439,
+        "t_kernel_exit_ns": 2091442360923,
+        "t_received_ns": 1792838474491129000,
+        "target": {
+          "access": "read",
+          "path": "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-8f2e528d34b2c40273b2b7af",
+      "ts": "2026-10-24T10:41:14.509303+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-8f2e528d34b2c40273b2b7af",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091460485940,
+        "t_kernel_exit_ns": 2091460535392,
+        "t_received_ns": 1792838474509303600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/pyvenv.cfg"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-e36344e8da8b4ff6ee0c3618",
+      "ts": "2026-10-24T10:41:14.509452+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-e36344e8da8b4ff6ee0c3618",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091460656997,
+        "t_kernel_exit_ns": 2091460684731,
+        "t_received_ns": 1792838474509453000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/pyvenv.cfg"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b4306b257429265b3308b572",
+      "ts": "2026-10-24T10:41:14.509681+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-b4306b257429265b3308b572",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091460887424,
+        "t_kernel_exit_ns": 2091460913168,
+        "t_received_ns": 1792838474509681400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/python3._pth"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-19a267ae3c07a16d514483aa",
+      "ts": "2026-10-24T10:41:14.509748+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-19a267ae3c07a16d514483aa",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091460958748,
+        "t_kernel_exit_ns": 2091460980528,
+        "t_received_ns": 1792838474509748700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/python3.12._pth"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b2a225276a1bd1f7d687247a",
+      "ts": "2026-10-24T10:41:14.509864+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-b2a225276a1bd1f7d687247a",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091461069957,
+        "t_kernel_exit_ns": 2091461095739,
+        "t_received_ns": 1792838474509864000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/bin/pybuilddir.txt"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-5bfe9933c41904d1a8a4f9d7",
+      "ts": "2026-10-24T10:41:14.517556+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-5bfe9933c41904d1a8a4f9d7",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091468623346,
+        "t_kernel_exit_ns": 2091468788114,
+        "t_received_ns": 1792838474517556500,
+        "target": {
+          "access": "read",
+          "path": "/usr/share/zoneinfo/Etc/UTC",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-66f5207668f39ac879478637",
+      "ts": "2026-10-24T10:41:14.519232+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-66f5207668f39ac879478637",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091470430701,
+        "t_kernel_exit_ns": 2091470464226,
+        "t_received_ns": 1792838474519232500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-dd63d627327abe5f2044f86a",
+      "ts": "2026-10-24T10:41:14.521455+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-dd63d627327abe5f2044f86a",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091472632003,
+        "t_kernel_exit_ns": 2091472687719,
+        "t_received_ns": 1792838474521455900,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-0788e6ae97c791e5b5b906a4",
+      "ts": "2026-10-24T10:41:14.521662+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-0788e6ae97c791e5b5b906a4",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091472860679,
+        "t_kernel_exit_ns": 2091472893907,
+        "t_received_ns": 1792838474521662200,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/__init__.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-a0a8cb1e906a044be86c1a1e",
+      "ts": "2026-10-24T10:41:14.543118+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-a0a8cb1e906a044be86c1a1e",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091494307842,
+        "t_kernel_exit_ns": 2091494349761,
+        "t_received_ns": 1792838474543118000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-61a1ad7e02ea52f2640b5797",
+      "ts": "2026-10-24T10:41:14.544555+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-61a1ad7e02ea52f2640b5797",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091495737722,
+        "t_kernel_exit_ns": 2091495787219,
+        "t_received_ns": 1792838474544555500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-89a04d2807377a07eb50a704",
+      "ts": "2026-10-24T10:41:14.544816+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-89a04d2807377a07eb50a704",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091495963751,
+        "t_kernel_exit_ns": 2091496047873,
+        "t_received_ns": 1792838474544816000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/aliases.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-a3281793d4aaa1d7f4354c8a",
+      "ts": "2026-10-24T10:41:14.557981+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-a3281793d4aaa1d7f4354c8a",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091509162299,
+        "t_kernel_exit_ns": 2091509213195,
+        "t_received_ns": 1792838474557981400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bb1d47d1d2235aa8d465339b",
+      "ts": "2026-10-24T10:41:14.558153+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-bb1d47d1d2235aa8d465339b",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091509349279,
+        "t_kernel_exit_ns": 2091509385111,
+        "t_received_ns": 1792838474558153500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/encodings/utf_8.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-37876aec9589a206eb48125d",
+      "ts": "2026-10-24T10:41:14.576676+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-37876aec9589a206eb48125d",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091527870969,
+        "t_kernel_exit_ns": 2091527908214,
+        "t_received_ns": 1792838474576676400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/site-packages",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-d9e5e1e7755d983cc80ea754",
+      "ts": "2026-10-24T10:41:14.577675+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-d9e5e1e7755d983cc80ea754",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091528875275,
+        "t_kernel_exit_ns": 2091528907358,
+        "t_received_ns": 1792838474577675500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/lib-dynload",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bb96c0b4afa7cf12817a7871",
+      "ts": "2026-10-24T10:41:14.578523+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-bb96c0b4afa7cf12817a7871",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091529725131,
+        "t_kernel_exit_ns": 2091529755326,
+        "t_received_ns": 1792838474578523600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/site-packages",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-3c7f5765aa5b8bf06bd3692e",
+      "ts": "2026-10-24T10:41:14.579825+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-3c7f5765aa5b8bf06bd3692e",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091530975592,
+        "t_kernel_exit_ns": 2091531057279,
+        "t_received_ns": 1792838474579825700,
+        "target": {
+          "access": "read",
+          "path": "/agents/agent.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-865d7b859128dbbdfd57fa89",
+      "ts": "2026-10-24T10:41:14.580451+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-865d7b859128dbbdfd57fa89",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091531659303,
+        "t_kernel_exit_ns": 2091531683242,
+        "t_received_ns": 1792838474580451600,
+        "target": {
+          "access": "read",
+          "path": "/agents/agent.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-54fd8e0c9b908265968e2d49",
+      "ts": "2026-10-24T10:41:14.593250+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-54fd8e0c9b908265968e2d49",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091544445254,
+        "t_kernel_exit_ns": 2091544482597,
+        "t_received_ns": 1792838474593250800,
+        "target": {
+          "access": "read",
+          "path": "/agents",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-bbf4b990f0133ad79c165b99",
+      "ts": "2026-10-24T10:41:14.594128+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-bbf4b990f0133ad79c165b99",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091545288335,
+        "t_kernel_exit_ns": 2091545360093,
+        "t_received_ns": 1792838474594128400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/datetime.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-e1e9ea245c9ab2dbcc8c5e80",
+      "ts": "2026-10-24T10:41:14.594303+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-e1e9ea245c9ab2dbcc8c5e80",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091545496639,
+        "t_kernel_exit_ns": 2091545534834,
+        "t_received_ns": 1792838474594303000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/datetime.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-395285a5d3e4c9b0f7f83021",
+      "ts": "2026-10-24T10:41:14.595957+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-395285a5d3e4c9b0f7f83021",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091547144675,
+        "t_kernel_exit_ns": 2091547189714,
+        "t_received_ns": 1792838474595958000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/lib-dynload/_datetime.cpython-312-x86_64-linux-gnu.so",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-608678afe24f1c816f818d83",
+      "ts": "2026-10-24T10:41:14.598435+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-608678afe24f1c816f818d83",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091549593617,
+        "t_kernel_exit_ns": 2091549667411,
+        "t_received_ns": 1792838474598435600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/__pycache__/__init__.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-609f91a179b3f0c43b1264ad",
+      "ts": "2026-10-24T10:41:14.598616+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-609f91a179b3f0c43b1264ad",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091549808459,
+        "t_kernel_exit_ns": 2091549848599,
+        "t_received_ns": 1792838474598616800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/__init__.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b5e7e0b15d43260c826da2b9",
+      "ts": "2026-10-24T10:41:14.606899+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-b5e7e0b15d43260c826da2b9",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091558090838,
+        "t_kernel_exit_ns": 2091558131301,
+        "t_received_ns": 1792838474606899500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-84d39c71c4f870d95da8fd36",
+      "ts": "2026-10-24T10:41:14.607631+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-84d39c71c4f870d95da8fd36",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091558817536,
+        "t_kernel_exit_ns": 2091558862769,
+        "t_received_ns": 1792838474607631000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/__pycache__/decoder.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-281d30a413400fa481754f2e",
+      "ts": "2026-10-24T10:41:14.607900+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-281d30a413400fa481754f2e",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091559089919,
+        "t_kernel_exit_ns": 2091559132218,
+        "t_received_ns": 1792838474607900400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/decoder.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-77899fd3c50395fa60ad7964",
+      "ts": "2026-10-24T10:41:14.625877+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-77899fd3c50395fa60ad7964",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091576982117,
+        "t_kernel_exit_ns": 2091577109681,
+        "t_received_ns": 1792838474625878000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__pycache__/__init__.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-21cc70ba5ddb61983cfa6614",
+      "ts": "2026-10-24T10:41:14.626059+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-21cc70ba5ddb61983cfa6614",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091577249719,
+        "t_kernel_exit_ns": 2091577291341,
+        "t_received_ns": 1792838474626059500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__init__.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-609230720f4fcc57b88274c9",
+      "ts": "2026-10-24T10:41:14.638900+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-609230720f4fcc57b88274c9",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091590082125,
+        "t_kernel_exit_ns": 2091590132639,
+        "t_received_ns": 1792838474638901000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/enum.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-c9a87d7506cdb99a70255879",
+      "ts": "2026-10-24T10:41:14.639154+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-c9a87d7506cdb99a70255879",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091590346675,
+        "t_kernel_exit_ns": 2091590385823,
+        "t_received_ns": 1792838474639154200,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/enum.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-9bd54c55bbdb0b804dc37097",
+      "ts": "2026-10-24T10:41:14.748553+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-9bd54c55bbdb0b804dc37097",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091699737236,
+        "t_kernel_exit_ns": 2091699785686,
+        "t_received_ns": 1792838474748554000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/types.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-0fcc7b4c1e414430675f4a23",
+      "ts": "2026-10-24T10:41:14.748738+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-0fcc7b4c1e414430675f4a23",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091699934081,
+        "t_kernel_exit_ns": 2091699970202,
+        "t_received_ns": 1792838474748738600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/types.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-5273606c619ece7bff8353a2",
+      "ts": "2026-10-24T10:41:14.762558+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-5273606c619ece7bff8353a2",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091713754567,
+        "t_kernel_exit_ns": 2091713790022,
+        "t_received_ns": 1792838474762558200,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/operator.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-acb34435c83e5707aafd3c29",
+      "ts": "2026-10-24T10:41:14.762686+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-acb34435c83e5707aafd3c29",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091713890059,
+        "t_kernel_exit_ns": 2091713918352,
+        "t_received_ns": 1792838474762686700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/operator.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b8d3e21878ad30c9fb10ceee",
+      "ts": "2026-10-24T10:41:14.778259+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-b8d3e21878ad30c9fb10ceee",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091729456966,
+        "t_kernel_exit_ns": 2091729491179,
+        "t_received_ns": 1792838474778259500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/functools.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-acf0707b3cabeb9eec9d8dfc",
+      "ts": "2026-10-24T10:41:14.778419+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-acf0707b3cabeb9eec9d8dfc",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091729611715,
+        "t_kernel_exit_ns": 2091729651281,
+        "t_received_ns": 1792838474778419500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/functools.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-7f4e8517e4e7ba2102d0abc3",
+      "ts": "2026-10-24T10:41:14.815165+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-7f4e8517e4e7ba2102d0abc3",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091766345894,
+        "t_kernel_exit_ns": 2091766397522,
+        "t_received_ns": 1792838474815165700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/collections/__pycache__/__init__.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-465422c94ccd6c0ed69cd530",
+      "ts": "2026-10-24T10:41:14.815326+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-465422c94ccd6c0ed69cd530",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091766520244,
+        "t_kernel_exit_ns": 2091766557798,
+        "t_received_ns": 1792838474815326000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/collections/__init__.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-576c71a06811c3d66b7afd8a",
+      "ts": "2026-10-24T10:41:14.865071+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-576c71a06811c3d66b7afd8a",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091816248421,
+        "t_kernel_exit_ns": 2091816302976,
+        "t_received_ns": 1792838474865071400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/keyword.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-70113b90ffcd1c3fd2e2c2ef",
+      "ts": "2026-10-24T10:41:14.865266+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-70113b90ffcd1c3fd2e2c2ef",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091816456231,
+        "t_kernel_exit_ns": 2091816498315,
+        "t_received_ns": 1792838474865266700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/keyword.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b15af26ef8f460befd748047",
+      "ts": "2026-10-24T10:41:14.867452+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-b15af26ef8f460befd748047",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091818652592,
+        "t_kernel_exit_ns": 2091818684102,
+        "t_received_ns": 1792838474867452400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/reprlib.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-8b048b8f2e84f8a04ef42dda",
+      "ts": "2026-10-24T10:41:14.867627+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-8b048b8f2e84f8a04ef42dda",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091818819203,
+        "t_kernel_exit_ns": 2091818858819,
+        "t_received_ns": 1792838474867627000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/reprlib.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-fd51446a29efa86b3151908e",
+      "ts": "2026-10-24T10:41:14.888029+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-fd51446a29efa86b3151908e",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091839232197,
+        "t_kernel_exit_ns": 2091839261417,
+        "t_received_ns": 1792838474888029700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-4c362132ed03a5fa6a05bbfb",
+      "ts": "2026-10-24T10:41:14.888461+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-4c362132ed03a5fa6a05bbfb",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091839664061,
+        "t_kernel_exit_ns": 2091839692995,
+        "t_received_ns": 1792838474888461300,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__pycache__/_compiler.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-9efb31c7c97988ba994122f6",
+      "ts": "2026-10-24T10:41:14.888558+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-9efb31c7c97988ba994122f6",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091839767234,
+        "t_kernel_exit_ns": 2091839789768,
+        "t_received_ns": 1792838474888558000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/_compiler.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-296f1edd172d8e301899aede",
+      "ts": "2026-10-24T10:41:14.926048+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-296f1edd172d8e301899aede",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091877246880,
+        "t_kernel_exit_ns": 2091877280457,
+        "t_received_ns": 1792838474926048800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__pycache__/_parser.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-49607b9e383823ea5a99f3c6",
+      "ts": "2026-10-24T10:41:14.926182+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-49607b9e383823ea5a99f3c6",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091877387395,
+        "t_kernel_exit_ns": 2091877414569,
+        "t_received_ns": 1792838474926183000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/_parser.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-fb810ee2cd36a551d785bf10",
+      "ts": "2026-10-24T10:41:14.969942+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-fb810ee2cd36a551d785bf10",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091921123616,
+        "t_kernel_exit_ns": 2091921174029,
+        "t_received_ns": 1792838474969942300,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__pycache__/_constants.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-b829195e74520a484c3fcd8c",
+      "ts": "2026-10-24T10:41:14.970112+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-b829195e74520a484c3fcd8c",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091921304488,
+        "t_kernel_exit_ns": 2091921343886,
+        "t_received_ns": 1792838474970112300,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/_constants.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-f5d04607b52709944130a2bc",
+      "ts": "2026-10-24T10:41:14.978709+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-f5d04607b52709944130a2bc",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091929905932,
+        "t_kernel_exit_ns": 2091929941377,
+        "t_received_ns": 1792838474978709800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/__pycache__/_casefix.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-a1ad922415decf3cab47cfb0",
+      "ts": "2026-10-24T10:41:14.978944+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-a1ad922415decf3cab47cfb0",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091930133801,
+        "t_kernel_exit_ns": 2091930175778,
+        "t_received_ns": 1792838474978944000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/re/_casefix.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-4ab78be6059ac3a7e13749d9",
+      "ts": "2026-10-24T10:41:14.985304+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-4ab78be6059ac3a7e13749d9",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091936486611,
+        "t_kernel_exit_ns": 2091936536629,
+        "t_received_ns": 1792838474985304800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/copyreg.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-3e27e49822a21b9c67e70c83",
+      "ts": "2026-10-24T10:41:14.985459+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-3e27e49822a21b9c67e70c83",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091936661668,
+        "t_kernel_exit_ns": 2091936691048,
+        "t_received_ns": 1792838474985459200,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/copyreg.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-6f96c21e5244a21d84ecfc3c",
+      "ts": "2026-10-24T10:41:14.992761+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-6f96c21e5244a21d84ecfc3c",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091943958822,
+        "t_kernel_exit_ns": 2091943993274,
+        "t_received_ns": 1792838474992761600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/__pycache__/scanner.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-89111361480e4ab43c7eb388",
+      "ts": "2026-10-24T10:41:14.993010+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-89111361480e4ab43c7eb388",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091944205475,
+        "t_kernel_exit_ns": 2091944242703,
+        "t_received_ns": 1792838474993011000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/scanner.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-ca9a09f439d7f6b9399357ab",
+      "ts": "2026-10-24T10:41:14.997238+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-ca9a09f439d7f6b9399357ab",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091948435135,
+        "t_kernel_exit_ns": 2091948469878,
+        "t_received_ns": 1792838474997238000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-9d0b6f6d94bb83329a251cfd",
+      "ts": "2026-10-24T10:41:15.002195+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-9d0b6f6d94bb83329a251cfd",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091953375312,
+        "t_kernel_exit_ns": 2091953426790,
+        "t_received_ns": 1792838475002195000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/__pycache__/encoder.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-0688b1adc0c25928fbf8904f",
+      "ts": "2026-10-24T10:41:15.002335+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-0688b1adc0c25928fbf8904f",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091953538366,
+        "t_kernel_exit_ns": 2091953567255,
+        "t_received_ns": 1792838475002335500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/json/encoder.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-39644d724fa4a5549744d10d",
+      "ts": "2026-10-24T10:41:15.019136+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-39644d724fa4a5549744d10d",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091970288598,
+        "t_kernel_exit_ns": 2091970368309,
+        "t_received_ns": 1792838475019136500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/pathlib.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-2717845a152aac4c2784d00f",
+      "ts": "2026-10-24T10:41:15.019344+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-2717845a152aac4c2784d00f",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2091970534470,
+        "t_kernel_exit_ns": 2091970576436,
+        "t_received_ns": 1792838475019344600,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/pathlib.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-f53d5b5d5a5af9a193850294",
+      "ts": "2026-10-24T10:41:15.068102+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-f53d5b5d5a5af9a193850294",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092019293868,
+        "t_kernel_exit_ns": 2092019333988,
+        "t_received_ns": 1792838475068102100,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/fnmatch.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-86e92404a20d9b43d2a78528",
+      "ts": "2026-10-24T10:41:15.068240+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-86e92404a20d9b43d2a78528",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092019446255,
+        "t_kernel_exit_ns": 2092019472042,
+        "t_received_ns": 1792838475068240400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/fnmatch.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-5319a841e9696398b213c7d9",
+      "ts": "2026-10-24T10:41:15.082227+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-5319a841e9696398b213c7d9",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092033410398,
+        "t_kernel_exit_ns": 2092033459512,
+        "t_received_ns": 1792838475082227700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/__pycache__/warnings.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-9177af8ee83a1b1f46623471",
+      "ts": "2026-10-24T10:41:15.082408+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-9177af8ee83a1b1f46623471",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092033597796,
+        "t_kernel_exit_ns": 2092033640352,
+        "t_received_ns": 1792838475082408700,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/warnings.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-7668d806cdafc527efa916cd",
+      "ts": "2026-10-24T10:41:15.112429+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-7668d806cdafc527efa916cd",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092063589967,
+        "t_kernel_exit_ns": 2092063661050,
+        "t_received_ns": 1792838475112429300,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/urllib/__pycache__/__init__.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-3d4a762d87cec594dbc5c564",
+      "ts": "2026-10-24T10:41:15.112587+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-3d4a762d87cec594dbc5c564",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092063783347,
+        "t_kernel_exit_ns": 2092063819672,
+        "t_received_ns": 1792838475112588000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/urllib/__init__.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-da0ecc386a8e3201e68f7bbc",
+      "ts": "2026-10-24T10:41:15.113314+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-da0ecc386a8e3201e68f7bbc",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092064516881,
+        "t_kernel_exit_ns": 2092064546435,
+        "t_received_ns": 1792838475113314800,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/urllib",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-d0757eeb587b5780828462ee",
+      "ts": "2026-10-24T10:41:15.114002+00:00",
+      "kind": "file_open",
+      "outcome": "failed",
+      "facts": {
+        "errno": 2,
+        "id": "ev-d0757eeb587b5780828462ee",
+        "kind": "file_open",
+        "outcome": "failed",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092065189960,
+        "t_kernel_exit_ns": 2092065234106,
+        "t_received_ns": 1792838475114002400,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/urllib/__pycache__/parse.cpython-312.pyc"
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-ba142d8b95e7e6efe1c06fad",
+      "ts": "2026-10-24T10:41:15.114150+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-ba142d8b95e7e6efe1c06fad",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092065346074,
+        "t_kernel_exit_ns": 2092065382560,
+        "t_received_ns": 1792838475114151000,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/urllib/parse.py",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-7479f5c225ca33bb5bbc91e2",
+      "ts": "2026-10-24T10:41:15.171571+00:00",
+      "kind": "file_open",
+      "outcome": "success",
+      "facts": {
+        "id": "ev-7479f5c225ca33bb5bbc91e2",
+        "kind": "file_open",
+        "outcome": "success",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "tgid": 2779,
+          "uid": 1000
+        },
+        "sensor": "ebpf",
+        "t_kernel_enter_ns": 2092122753724,
+        "t_kernel_exit_ns": 2092122803249,
+        "t_received_ns": 1792838475171571500,
+        "target": {
+          "access": "read",
+          "path": "/usr/local/lib/python3.12/lib-dynload/math.cpython-312-x86_64-linux-gnu.so",
+          "path_resolved": true
+        },
+        "workload": {
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "enrolled": true,
+          "id": "coding-notes-agent-01",
+          "kind": "ai_worker",
+          "name": "coding-notes-agent-01",
+          "profile": "coding-notes-agent",
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    },
+    {
+      "id": "ev-68256894b7b11499aeb039d0",
+      "ts": "2026-10-24T10:41:16.796218+00:00",
+      "kind": "net_connect",
+      "outcome": "pending",
+      "facts": {
+        "errno": 115,
+        "identity": {
+          "asset_id": "coding-notes-agent-01",
+          "container_id": "b11c8760417979ad9c3486a61588ad1286930f447fa00d36d6d25a516ed637cf",
+          "generation": "2026-10-24T10:38:51.644875199Z",
+          "host_id": "demo-host",
+          "tenant_id": "demo"
+        },
+        "normalizer": {
+          "identity_verified": true,
+          "notes": [],
+          "resource_verified": true,
+          "sensor_authenticated": true
+        },
+        "operation": "NET_CONNECT",
+        "outcome": "ATTEMPTED",
+        "process": {
+          "comm": "python3",
+          "pid": 2779,
+          "ppid": 1910,
+          "uid": 1000
+        },
+        "provenance": "LIVE",
+        "sensor": "ebpf",
+        "target": {
+          "ip": "172.22.0.2",
+          "port": 11434
+        },
+        "workload": {
+          "team": "platform"
+        }
+      },
+      "session_id": null
+    }
+  ],
+  "agent_log": [],
+  "incidents": [
+    {
+      "id": "inc_84c45bbb2116",
+      "created_at": "2026-10-24T10:41:14.685392+00:00",
+      "title": "File read outside scope",
+      "rule": "READ_OUTSIDE_SCOPE",
+      "severity": "high",
+      "verdict": "prohibited",
+      "status": "open",
+      "mode": "shadow",
+      "session_id": null,
+      "event_ids": [
+        "ev-93ec80bb8d923223f53cd964"
+      ]
+    },
+    {
+      "id": "inc_84b126d44974",
+      "created_at": "2026-10-24T10:41:20.793544+00:00",
+      "title": "Network connection outside scope",
+      "rule": "EGRESS_OUTSIDE_SCOPE",
+      "severity": "high",
+      "verdict": "prohibited",
+      "status": "open",
+      "mode": "shadow",
+      "session_id": null,
+      "event_ids": [
+        "ev-68256894b7b11499aeb039d0"
+      ]
+    }
+  ]
+}

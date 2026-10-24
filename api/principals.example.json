@@ -1,0 +1,11 @@
+[
+  {"name": "rajiv", "kind": "operator", "role": "admin", "token_sha256": "REPLACE_WITH_OUTPUT_OF_cli_new-token"},
+  {"name": "oncall-1", "kind": "operator", "role": "responder", "token_sha256": "REPLACE_ME"},
+  {"name": "payments-oncall", "kind": "operator", "role": "responder", "teams": ["payments"], "token_sha256": "REPLACE_ME"},
+  {"name": "auditor", "kind": "operator", "role": "viewer", "token_sha256": "REPLACE_ME"},
+  {"name": "node-a-sensor", "kind": "machine", "role": "sensor", "token_sha256": "REPLACE_ME"},
+  {"name": "policy-engine", "kind": "machine", "role": "policy", "token_sha256": "REPLACE_ME"},
+  {"name": "containment-a", "kind": "machine", "role": "containment", "token_sha256": "REPLACE_ME"},
+  {"name": "tool-gateway", "kind": "machine", "role": "gateway", "token_sha256": "REPLACE_ME"},
+  {"name": "idp-revoker", "kind": "machine", "role": "revoker", "token_sha256": "REPLACE_ME"}
+]

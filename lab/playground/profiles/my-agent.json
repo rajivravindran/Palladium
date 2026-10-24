@@ -1,0 +1,15 @@
+{
+  "name": "my-agent",
+  "kind": "ai_worker",
+  "description": "Starter profile to edit: reads /data, writes /out, runs Python only, talks to 10.0.0.0/8 only.",
+  "version": 1,
+  "mode": "ACTIVE_FREEZE_MODE",
+  "decoys": ["/home/agent/.ssh/id_rsa_backup"],
+  "protected_read": ["/root/**", "/etc/shadow"],
+  "read_allowed": ["/data/**", "/etc/app/**"],
+  "write_allowed": ["/out/**"],
+  "exec_allowed_classes": ["INTERPRETER"],
+  "exec_denied_classes": ["NET_CLIENT", "PRIVILEGED_TOOL"],
+  "egress_allowed": ["10.0.0.0/8"],
+  "response": {"on_violation": "PAUSE_CONTAINER", "on_structural_guard": "ALERT"}
+}

@@ -1,0 +1,5 @@
+{
+  "night-shift": ["read", "act"],
+  "compliance": ["read", "audit"],
+  "responder": ["read", "act", "summarize"]
+}

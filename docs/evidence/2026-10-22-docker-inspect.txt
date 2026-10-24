@@ -1,0 +1,45 @@
+# WHAT THIS IS: real run on 2026-10-21 19:17Z (2026-10-22 00:47 IST) on one Linux 6.18 host with a live Docker
+# daemon, produced by demo/run.sh with no mock components. Two containers from river3-lab-base:latest ran the
+# scripted Python agents (demo/agents/coding_agent.py, devops_agent.py). Components in the run:
+#   - eBPF TRACEPOINT sensor (`river3d -source ebpf -enroll-from-labels`), NOT the LSM source; no inline blocking
+#   - controller `river3-containd -adapter docker -registry-from-runtime`
+#   - the API (river3_api, development principals)
+#   - the reference gateway (lab/gateway/gateway.py)
+# Outcome: two PAUSE_CONTAINER actions executed via the Docker Engine API and VERIFIED by the controller
+# re-inspecting each container and reading State.Status=paused (journal seq 72-74 and 116-118).
+# NOT demonstrated in this run: BPF-LSM / -block-decoys, the gateway session adapter / revoke path
+# (-session-adapter unset), -sessions-from-api.
+#
+# THIS FILE: the Docker daemon's `docker inspect` output for the two agent containers (selected fields) plus
+# `docker ps`, taken right after the run at 2026-10-21T19:18:23Z, i.e. about 17 s after the second pause was
+# verified. State.Status=paused / State.Paused=true on both is the daemon's own view, independent of the
+# controller's journal. Companion file: 2026-10-22-demo-journal.txt.
+
+## river3-demo-coding
+Id=e1cdc0849b415769c3c62ca856fd1fd8e4f823574b2dae2430ac2ac5916a1283
+Name=/river3-demo-coding
+Image=river3-lab-base:latest
+State.Status=paused
+State.Paused=true
+State.Running=true
+State.StartedAt=2026-10-21T19:17:16.309591556Z
+HostConfig.NetworkMode=host
+User=1000:1000
+Labels={"river3.asset_id":"coding-agent-01","river3.enroll":"true","river3.kind":"ai_worker","river3.name":"coding-agent-01","river3.profile":"coding-agent","river3.team":"platform"}
+
+## river3-demo-devops
+Id=4fe3c2cb71ab7b4c8b48a2f6770b1e9db4168928e115856fa0b63730185ef3a1
+Name=/river3-demo-devops
+Image=river3-lab-base:latest
+State.Status=paused
+State.Paused=true
+State.Running=true
+State.StartedAt=2026-10-21T19:17:16.61111946Z
+HostConfig.NetworkMode=host
+User=1000:1000
+Labels={"river3.asset_id":"devops-agent-01","river3.enroll":"true","river3.kind":"ai_worker","river3.name":"devops-agent-01","river3.profile":"devops-agent","river3.team":"platform"}
+
+## docker ps
+CONTAINER ID   NAMES                STATUS
+4fe3c2cb71ab   river3-demo-devops   Up About a minute (Paused)
+e1cdc0849b41   river3-demo-coding   Up About a minute (Paused)

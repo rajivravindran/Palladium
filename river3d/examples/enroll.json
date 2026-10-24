@@ -1,0 +1,9 @@
+[
+  {
+    "asset_id": "worker-01",
+    "name": "Diagnostic worker 01",
+    "profile": "diagnostic-worker",
+    "kind": "ai_worker",
+    "container_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+]
